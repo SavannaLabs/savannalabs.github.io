@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | SavannaLabs - Interceptor</title>
+
+    <!-- CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --amber: #D4783B;
+            --green: #2D6A4F;
+            --gold: #F4A261;
+            --offwhite: #FFF8F0;
+            --dark: #1A1A1A;
+            --glass: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--offwhite);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* --- LIQUID GLASS (macOS) --- */
+        .liquid-glass {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+            border-radius: 2rem;
+        }
+
+        .glass-nav {
+            background: rgba(255, 248, 240, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 120, 59, 0.1);
+        }
+
+        /* --- MESH GRADIENT ANIMADO --- */
+        .mesh-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            background: var(--offwhite);
+        }
+
+        .mesh-ball {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: move 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(20vw, 20vh) scale(1.5); }
+        }
+
+        /* --- SCROLL NARRATIVO --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .text-grad {
+            background: linear-gradient(135deg, var(--amber), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- INTERACTIVE --- */
+        .btn-apple {
+            background: var(--dark);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-apple:hover {
+            background: #000;
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* --- POLICY PROSE --- */
+        .policy-body {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: #374151;
+        }
+        .policy-body h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: var(--dark);
+            margin: 2.5rem 0 1rem;
+        }
+        .policy-body h2:first-child {
+            margin-top: 0;
+        }
+        .policy-body p {
+            margin-bottom: 1.25rem;
+        }
+        .policy-body strong {
+            color: var(--dark);
+            font-weight: 700;
+        }
+        .policy-body code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.85em;
+            background: rgba(212, 120, 59, 0.08);
+            color: #92400E;
+            padding: 0.15em 0.4em;
+            border-radius: 0.4rem;
+        }
+
+        /* --- ACCESSIBILITY --- */
+        :focus-visible {
+            outline: 3px solid rgba(212, 120, 59, 0.65);
+            outline-offset: 2px;
+        }
+
+        ::selection {
+            background: rgba(212, 120, 59, 0.3);
+        }
+
+        button.btn-apple {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .mesh-ball,
+            .animate-ping {
+                animation: none !important;
+            }
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Logo area: lighter background so transparent logos remain visible */
+        .logo-area {
+            background: #ffffff; /* solid white for best contrast */
+            padding: 6px; /* small padding so logo has breathing room */
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+            /* let the logo's natural width define the area while constraining height */
+            width: auto;
+            height: 64px; /* container height that the logo will fit into */
+            min-width: 120px;
+        }
+
+        /* Preserve original image proportions by constraining height and auto width */
+        .logo-img {
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Responsive: slightly smaller logo area on small screens */
+        @media (max-width: 768px) {
+            .logo-area { height: 48px; }
+        }
+    </style>
+    <noscript>
+        <style>
+            .reveal { opacity: 1; transform: none; }
+        </style>
+    </noscript>
+</head>
+<body>
+
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-3 focus:rounded-full focus:bg-[var(--dark)] focus:text-white focus:font-bold focus:text-sm">Skip to content</a>
+
+    <!-- Mesh Gradient Background -->
+    <div class="mesh-container">
+        <div class="mesh-ball" style="width: 600px; height: 600px; background: var(--amber); top: -10%; left: -10%;"></div>
+        <div class="mesh-ball" style="width: 500px; height: 500px; background: var(--green); bottom: -10%; right: -10%; animation-delay: -5s;"></div>
+        <div class="mesh-ball" style="width: 400px; height: 400px; background: var(--gold); top: 40%; left: 30%; animation-delay: -10s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav py-4 transition-all duration-500" id="navbar" aria-label="Primary">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3" aria-label="SavannaLabs home">
+                <div class="logo-area">
+                    <img src="assets/savannalabs-logo.png" alt="" class="logo-img">
+                    <div class="hidden" id="logo-fallback">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[var(--amber)] to-[var(--green)] rounded-xl flex items-center justify-center text-white shadow-lg">
+                            <i class="fa-solid fa-giraffe"></i>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    // If the logo image fails to load, show the fallback icon
+                    (function(){
+                        const img = document.querySelector('.logo-img');
+                        const fallback = document.getElementById('logo-fallback');
+                        if (!img) return;
+                        img.addEventListener('error', () => {
+                            fallback.classList.remove('hidden');
+                            img.style.display = 'none';
+                        });
+                        img.addEventListener('load', () => {
+                            fallback.classList.add('hidden');
+                        });
+                    })();
+                </script>
+            </a>
+            <div class="hidden md:flex gap-8 font-medium text-sm">
+                <a href="index.html#features" class="hover:text-[var(--amber)] transition-colors">Features</a>
+                <a href="index.html#how" class="hover:text-[var(--amber)] transition-colors">How It Works</a>
+                <a href="index.html#pricing" class="hover:text-[var(--amber)] transition-colors">Pricing</a>
+            </div>
+            <a href="index.html#pricing" class="btn-apple px-6 py-2.5 rounded-full text-sm font-bold">Get It Now</a>
+        </div>
+    </nav>
+
+    <!-- Privacy Policy -->
+    <main id="main" class="relative pt-28 md:pt-32 py-20 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="reveal text-center mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-[var(--amber)] mb-4 block">Privacy Policy</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.1] tracking-tight">
+                        Privacy Policy <span class="text-grad">— Interceptor</span>
+                    </h1>
+                </div>
+
+                <!-- Before publishing callout -->
+                <div class="reveal liquid-glass p-8 md:p-10 mb-10 border-[var(--amber)]/30 shadow-[0_0_50px_rgba(212,120,59,0.08)]">
+                    <div class="flex items-start gap-5">
+                        <div class="w-12 h-12 shrink-0 rounded-2xl bg-amber-100 flex items-center justify-center">
+                            <i class="fa-solid fa-triangle-exclamation text-xl text-[var(--amber)]"></i>
+                        </div>
+                        <div class="policy-body text-sm">
+                            <p class="mb-0">
+                                <strong>Before publishing:</strong> replace <code>[CONTACT EMAIL]</code> and
+                                <code>[EFFECTIVE DATE]</code> below, then host this at a stable public URL and enter that
+                                URL in App Store Connect. A privacy policy URL is required; the submission cannot be sent
+                                without one.
+                            </p>
+                            <p class="mt-3 mb-0">
+                                Everything else in this document is a factual description of what the code in this repository
+                                does. If the app ever gains analytics, crash reporting, an account system, or any network
+                                call of its own, this document and the <code>PrivacyInfo.xcprivacy</code> files stop being
+                                true and must both be updated.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Policy content -->
+                <div class="reveal liquid-glass p-8 md:p-14">
+                    <div class="policy-body">
+                        <p class="font-bold text-gray-800"><strong>Effective date:</strong> <code>[EFFECTIVE DATE]</code></p>
+
+                        <p>
+                            Interceptor is a Safari web extension for developers. It lets you define rules that mock or
+                            modify <code>fetch</code> and <code>XMLHttpRequest</code> responses in your own browser, so
+                            you can test how a web application behaves without changing its backend.
+                        </p>
+
+                        <h2>We do not collect any data</h2>
+                        <p>
+                            Interceptor does not collect, transmit, sell, or share any personal information.
+                        </p>
+                        <p>
+                            There is no account, no sign-in, and no server operated by us. The extension makes no network
+                            requests of its own. It contains no analytics, no telemetry, no crash reporting, and no
+                            advertising or tracking of any kind.
+                        </p>
+
+                        <h2>What the extension stores, and where</h2>
+                        <p>
+                            Interceptor saves the interception rules you create — their names, URL patterns, HTTP methods,
+                            response bodies, headers, and transforms — along with the list of sites you have de-authorised.
+                        </p>
+                        <p>
+                            This is stored using the browser's local extension storage (<code>browser.storage.local</code>)
+                            <strong>on your device only</strong>. It is never uploaded anywhere. Deleting the extension
+                            removes it.
+                        </p>
+                        <p>
+                            If you use the Export or Share buttons, the resulting file goes wherever you choose to send it.
+                            That transfer is initiated by you and handled by macOS; the extension is not involved beyond
+                            producing the file.
+                        </p>
+
+                        <h2>What the extension can see</h2>
+                        <p>
+                            To do its job, Interceptor needs permission to run on the pages you visit. This lets it observe
+                            and alter network responses on any site, which is the entire function of the tool.
+                        </p>
+                        <p>
+                            That access is used solely to match your rules against requests as they happen, in your browser,
+                            in memory. Response contents are not stored, logged, or transmitted. The extension has no way
+                            to send them anywhere, because it makes no network requests.
+                        </p>
+                        <p>
+                            You can disable Interceptor for any individual site using the de-authorise button in the popup,
+                            or disable the extension entirely in Safari Settings.
+                        </p>
+
+                        <h2>Children</h2>
+                        <p>
+                            Interceptor is a developer tool and is not directed at children. It collects no data from
+                            anyone, of any age.
+                        </p>
+
+                        <h2>Changes</h2>
+                        <p>
+                            If this policy changes, the revised version will be posted at this URL with an updated effective
+                            date.
+                        </p>
+
+                        <h2>Contact</h2>
+                        <p>
+                            Questions about this policy: <code>[CONTACT EMAIL]</code>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Back to home -->
+                <div class="reveal text-center mt-12">
+                    <a href="index.html" class="inline-flex items-center gap-2 font-semibold text-[var(--amber)] hover:text-[var(--dark)] transition-colors">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back to home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-gray-200/50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+                <a href="index.html" class="flex items-center gap-3">
+                    <span class="font-bold text-lg">SavannaLabs</span>
+                </a>
+                <p class="text-sm text-gray-600">&copy; 2026 SavannaLabs. All rights reserved.</p>
+                <div class="flex gap-6 text-xl text-gray-600">
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hide decorative icons from screen readers
+        document.querySelectorAll('i[class*="fa-"]').forEach(el => el.setAttribute('aria-hidden', 'true'));
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-lg');
+                navbar.style.background = 'rgba(255, 248, 240, 0.9)';
+            } else {
+                navbar.classList.remove('py-2', 'shadow-lg');
+                navbar.style.background = 'rgba(255, 248, 240, 0.7)';
+            }
+        });
+    </script>
+</body>
+</html>
