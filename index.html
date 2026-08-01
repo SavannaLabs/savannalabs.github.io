@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interceptor | SavannaLabs - Safari Native Mocking</title>
+    
+    <!-- CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --amber: #D4783B;
+            --green: #2D6A4F;
+            --gold: #F4A261;
+            --offwhite: #FFF8F0;
+            --dark: #1A1A1A;
+            --glass: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--offwhite);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* --- LIQUID GLASS (iOS 26) --- */
+        .liquid-glass {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+            border-radius: 2rem;
+        }
+
+        .glass-nav {
+            background: rgba(255, 248, 240, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 120, 59, 0.1);
+        }
+
+        /* --- MESH GRADIENT ANIMADO --- */
+        .mesh-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            background: var(--offwhite);
+        }
+
+        .mesh-ball {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: move 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(20vw, 20vh) scale(1.5); }
+        }
+
+        /* --- SCROLL NARRATIVO --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .text-fluid-h1 { font-size: clamp(2.5rem, 8vw, 5rem); }
+        .text-grad {
+            background: linear-gradient(135deg, var(--amber), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- INTERACTIVE --- */
+        .hover-3d {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hover-3d:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .btn-apple {
+            background: var(--dark);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-apple:hover {
+            background: #000;
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* --- CUSTOM ELEMENTS --- */
+        .step-number {
+            font-size: 6rem;
+            font-weight: 900;
+            opacity: 0.1;
+            position: absolute;
+            top: -20px; left: 10px;
+            background: linear-gradient(to bottom, var(--amber), transparent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mesh Gradient Background -->
+    <div class="mesh-container">
+        <div class="mesh-ball" style="width: 600px; height: 600px; background: var(--amber); top: -10%; left: -10%;"></div>
+        <div class="mesh-ball" style="width: 500px; height: 500px; background: var(--green); bottom: -10%; right: -10%; animation-delay: -5s;"></div>
+        <div class="mesh-ball" style="width: 400px; height: 400px; background: var(--gold); top: 40%; left: 30%; animation-delay: -10s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav py-4 transition-all duration-500" id="navbar">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-[var(--amber)] to-[var(--green)] rounded-xl flex items-center justify-center text-white shadow-lg">
+                    <i class="fa-solid fa-giraffe"></i>
+                </div>
+                <span class="font-extrabold text-xl tracking-tighter">Savanna<span class="text-[var(--amber)]">Labs</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 font-medium text-sm">
+                <a href="#features" class="hover:text-[var(--amber)] transition-colors">Features</a>
+                <a href="#how" class="hover:text-[var(--amber)] transition-colors">Como Funciona</a>
+                <a href="#pricing" class="hover:text-[var(--amber)] transition-colors">Preço</a>
+            </div>
+            <a href="#pricing" class="btn-apple px-6 py-2.5 rounded-full text-sm font-bold">Obter Agora</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="container mx-auto px-6 text-center z-10">
+            <div class="reveal inline-flex items-center gap-2 bg-white/50 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full mb-8 shadow-sm">
+                <span class="flex h-2 w-2 rounded-full bg-[var(--amber)] animate-ping"></span>
+                <span class="text-xs font-bold uppercase tracking-widest text-[var(--amber)]">Lançamento iOS 26 Native</span>
+            </div>
+            
+            <h1 class="reveal text-fluid-h1 font-extrabold leading-[1.1] tracking-tight mb-6">
+                Domine suas <span class="text-grad">requisições</span><br>no Safari.
+            </h1>
+            
+            <p class="reveal text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+                O Interceptor é a ferramenta definitiva para desenvolvedores. Mock, modifique e analise tráfego HTTP nativamente, sem proxies ou configurações complexas.
+            </p>
+
+            <div class="reveal flex flex-col md:flex-row gap-4 justify-center items-center mb-20">
+                <a href="#" class="btn-apple flex items-center gap-3 px-10 py-5 rounded-2xl text-lg font-bold">
+                    <i class="fa-brands fa-apple text-2xl"></i>
+                    Download na App Store
+                </a>
+                <span class="text-sm font-medium text-gray-400">Versão 1.0 • macOS & iOS</span>
+            </div>
+
+            <!-- Hero Mockup -->
+            <div class="reveal max-w-5xl mx-auto relative">
+                <div class="liquid-glass p-4 md:p-8 border-white/40 shadow-2xl">
+                    <div class="bg-white/80 rounded-xl overflow-hidden shadow-inner border border-gray-100">
+                        <div class="flex items-center gap-2 px-4 py-3 bg-gray-50/50 border-b border-gray-100">
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                            <div class="ml-4 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Interceptor Rule Editor</div>
+                        </div>
+                        <div class="p-6 md:p-12 text-left">
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div class="h-2 w-24 bg-[var(--amber)]/20 rounded"></div>
+                                    <div class="h-12 w-full bg-gray-100 rounded-lg"></div>
+                                    <div class="h-2 w-32 bg-[var(--amber)]/20 rounded"></div>
+                                    <div class="h-32 w-full bg-gray-100 rounded-lg"></div>
+                                </div>
+                                <div class="hidden md:block space-y-4">
+                                    <div class="flex justify-between items-center p-4 bg-[var(--amber)]/5 rounded-xl border border-[var(--amber)]/10">
+                                        <span class="text-sm font-bold">Status Code</span>
+                                        <span class="text-sm font-mono text-[var(--amber)]">200 OK</span>
+                                    </div>
+                                    <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                        <span class="text-xs font-bold text-gray-400 block mb-2">HEADERS</span>
+                                        <div class="h-2 w-full bg-gray-200 rounded mb-2"></div>
+                                        <div class="h-2 w-3/4 bg-gray-200 rounded"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-32 bg-white/30">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight">Por que o Safari ainda é o<br><span class="text-[var(--amber)]">parente pobre</span> das ferramentas de dev?</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="reveal liquid-glass p-10 hover-3d">
+                    <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-link-slash text-2xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Proxies Instáveis</h3>
+                    <p class="text-gray-500 leading-relaxed">Cansado de configurar Charles ou Proxyman apenas para ver o Safari ignorar os certificados? O Interceptor é nativo.</p>
+                </div>
+                <div class="reveal liquid-glass p-10 hover-3d" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-microchip text-2xl text-[var(--amber)]"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Consumo de Recursos</h3>
+                    <p class="text-gray-500 leading-relaxed">Ferramentas Electron drenam sua bateria. Nossa extensão usa as APIs nativas do WebKit para performance máxima.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-32">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="reveal liquid-glass p-8 hover-3d">
+                    <i class="fa-solid fa-bolt text-3xl text-[var(--amber)] mb-6"></i>
+                    <h3 class="text-lg font-bold mb-3">Mock de Fetch Nativo</h3>
+                    <p class="text-sm text-gray-500">Intercepte chamadas Fetch e XHR diretamente no motor do navegador sem latência.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="reveal liquid-glass p-8 hover-3d" style="transition-delay: 0.1s;">
+                    <i class="fa-solid fa-sliders text-3xl text-[var(--green)] mb-6"></i>
+                    <h3 class="text-lg font-bold mb-3">Modify Response</h3>
+                    <p class="text-sm text-gray-500">Altere Status Codes, Headers e o Body (JSON/Text) em tempo real para testar edge cases.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="reveal liquid-glass p-8 hover-3d" style="transition-delay: 0.2s;">
+                    <i class="fa-solid fa-wand-magic-sparkles text-3xl text-[var(--gold)] mb-6"></i>
+                    <h3 class="text-lg font-bold mb-3">Wildcards & Regex</h3>
+                    <p class="text-sm text-gray-500">Crie regras poderosas usando padrões de URL flexíveis para múltiplos endpoints.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="reveal liquid-glass p-8 hover-3d" style="transition-delay: 0.3s;">
+                    <i class="fa-solid fa-file-export text-3xl text-blue-500 mb-6"></i>
+                    <h3 class="text-lg font-bold mb-3">Import/Export</h3>
+                    <p class="text-sm text-gray-500">Compartilhe suas coleções de regras com o time através de arquivos JSON portáveis.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="reveal liquid-glass p-8 hover-3d" style="transition-delay: 0.4s;">
+                    <i class="fa-solid fa-shield-check text-3xl text-purple-500 mb-6"></i>
+                    <h3 class="text-lg font-bold mb-3">Zero Config</h3>
+                    <p class="text-sm text-gray-500">Sem certificados root, sem proxies de sistema. Instale e comece a mockar em segundos.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="reveal liquid-glass p-8 hover-3d" style="transition-delay: 0.5s;">
+                    <i class="fa-solid fa-laptop-code text-3xl text-gray-800 mb-6"></i>
+                    <h3 class="text-lg font-bold mb-3">UI Nativa macOS</h3>
+                    <p class="text-sm text-gray-500">Uma interface que parece parte do sistema, respeitando o Dark Mode e o design da Apple.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how" class="py-32 bg-white/20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="reveal text-center text-4xl font-bold mb-24">Três passos para o controle total.</h2>
+            <div class="grid md:grid-cols-3 gap-16">
+                <div class="reveal relative">
+                    <span class="step-number">01</span>
+                    <div class="pt-12">
+                        <h3 class="text-2xl font-bold mb-4">Instale</h3>
+                        <p class="text-gray-500">Baixe na App Store e ative a extensão nas preferências do Safari com um clique.</p>
+                    </div>
+                </div>
+                <div class="reveal relative" style="transition-delay: 0.2s;">
+                    <span class="step-number">02</span>
+                    <div class="pt-12">
+                        <h3 class="text-2xl font-bold mb-4">Crie a Regra</h3>
+                        <p class="text-gray-500">Defina a URL alvo e o que você quer que aconteça: bloquear, redirecionar ou mockar.</p>
+                    </div>
+                </div>
+                <div class="reveal relative" style="transition-delay: 0.4s;">
+                    <span class="step-number">03</span>
+                    <div class="pt-12">
+                        <h3 class="text-2xl font-bold mb-4">Mocke</h3>
+                        <p class="text-gray-500">Recarregue a página e veja sua aplicação reagindo aos dados simulados instantaneamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-32">
+        <div class="container mx-auto px-6">
+            <div class="reveal max-w-lg mx-auto liquid-glass p-12 border-[var(--amber)]/30 shadow-[0_0_50px_rgba(212,120,59,0.1)] text-center">
+                <span class="text-xs font-bold uppercase tracking-widest text-[var(--amber)] mb-4 block">Oferta de Lançamento</span>
+                <h2 class="text-4xl font-bold mb-6">Pago Único.</h2>
+                <div class="flex items-center justify-center gap-2 mb-8">
+                    <span class="text-5xl font-black">$12</span>
+                    <span class="text-2xl font-bold text-gray-400">.99</span>
+                </div>
+                <ul class="text-left space-y-4 mb-10">
+                    <li class="flex items-center gap-3 text-sm font-medium">
+                        <i class="fa-solid fa-circle-check text-[var(--green)]"></i> Acesso Vitalício
+                    </li>
+                    <li class="flex items-center gap-3 text-sm font-medium">
+                        <i class="fa-solid fa-circle-check text-[var(--green)]"></i> Todas as atualizações futuras
+                    </li>
+                    <li class="flex items-center gap-3 text-sm font-medium">
+                        <i class="fa-solid fa-circle-check text-[var(--green)]"></i> Sincronização via iCloud
+                    </li>
+                    <li class="flex items-center gap-3 text-sm font-medium">
+                        <i class="fa-solid fa-circle-check text-[var(--green)]"></i> Suporte prioritário
+                    </li>
+                </ul>
+                <a href="#" class="btn-apple w-full py-5 rounded-2xl font-bold text-xl block">Comprar Agora</a>
+                <p class="mt-6 text-xs text-gray-400 italic">Sem assinaturas. Sem taxas escondidas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-32 text-center">
+        <div class="container mx-auto px-6">
+            <div class="reveal mb-16">
+                <div class="flex justify-center gap-1 mb-6 text-[var(--gold)]">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-2xl md:text-3xl font-medium italic text-gray-700 max-w-3xl mx-auto">
+                    "Finalmente uma ferramenta de mocking que não parece um hack. O Interceptor é essencial para qualquer dev que leva o Safari a sério."
+                </p>
+                <span class="block mt-6 font-bold text-[var(--amber)]">— Senior Frontend Engineer @ TechFlow</span>
+            </div>
+            
+            <div class="reveal">
+                <h2 class="text-4xl md:text-6xl font-bold mb-12">Pronto para o próximo nível?</h2>
+                <a href="#" class="btn-apple inline-flex items-center gap-4 px-12 py-6 rounded-2xl text-2xl font-bold">
+                    <i class="fa-brands fa-apple text-3xl"></i>
+                    Get Interceptor
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-gray-200/50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-gradient-to-br from-[var(--amber)] to-[var(--green)] rounded-lg flex items-center justify-center text-white text-xs">
+                        <i class="fa-solid fa-giraffe"></i>
+                    </div>
+                    <span class="font-bold text-lg">SavannaLabs</span>
+                </div>
+                <p class="text-sm text-gray-400">&copy; 2026 SavannaLabs. Todos os direitos reservados.</p>
+                <div class="flex gap-6 text-xl text-gray-400">
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer para animações de scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-lg');
+                navbar.style.background = 'rgba(255, 248, 240, 0.9)';
+            } else {
+                navbar.classList.remove('py-2', 'shadow-lg');
+                navbar.style.background = 'rgba(255, 248, 240, 0.7)';
+            }
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
