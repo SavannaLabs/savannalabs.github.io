@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support | SavannaLabs - Interceptor</title>
+    <meta name="description" content="Support page for the Interceptor Safari extension. How to report bugs, contact support, and useful links.">
+
+    <!-- CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --amber: #D4783B;
+            --green: #2D6A4F;
+            --gold: #F4A261;
+            --offwhite: #FFF8F0;
+            --dark: #1A1A1A;
+            --glass: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--offwhite);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .liquid-glass {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+            border-radius: 2rem;
+        }
+
+        .glass-nav {
+            background: rgba(255, 248, 240, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 120, 59, 0.1);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .text-grad {
+            background: linear-gradient(135deg, var(--amber), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .policy-body {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: #374151;
+        }
+
+        .policy-body h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: var(--dark);
+            margin: 2.5rem 0 1rem;
+        }
+
+        .policy-body p { margin-bottom: 1.25rem; }
+
+        :focus-visible { outline: 3px solid rgba(212, 120, 59, 0.65); outline-offset: 2px; }
+        ::selection { background: rgba(212, 120, 59, 0.3); }
+        .logo-area { background: #ffffff; padding: 6px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 0; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 6px 18px rgba(0,0,0,0.04); width: auto; height: 64px; min-width: 120px; }
+        .logo-img { height: 100%; width: auto; max-width: 100%; object-fit: contain; display: block; }
+        @media (max-width: 768px) { .logo-area { height: 48px; } }
+    </style>
+    <noscript>
+        <style>.reveal { opacity: 1; transform: none; }</style>
+    </noscript>
+</head>
+<body>
+
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-3 focus:rounded-full focus:bg-[var(--dark)] focus:text-white focus:font-bold focus:text-sm">Skip to content</a>
+
+    <div class="mesh-container">
+        <div class="mesh-ball" style="width: 600px; height: 600px; background: var(--amber); top: -10%; left: -10%;"></div>
+        <div class="mesh-ball" style="width: 500px; height: 500px; background: var(--green); bottom: -10%; right: -10%; animation-delay: -5s;"></div>
+        <div class="mesh-ball" style="width: 400px; height: 400px; background: var(--gold); top: 40%; left: 30%; animation-delay: -10s;"></div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 glass-nav py-4 transition-all duration-500" id="navbar" aria-label="Primary">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3" aria-label="SavannaLabs home">
+                <div class="logo-area">
+                    <img src="assets/savannalabs-logo.png" alt="" class="logo-img" width="107" height="50">
+                </div>
+            </a>
+            <div class="hidden md:flex gap-8 font-medium text-sm">
+                <a href="index.html#features" class="hover:text-[var(--amber)] transition-colors">Features</a>
+                <a href="index.html#how" class="hover:text-[var(--amber)] transition-colors">How It Works</a>
+                <a href="index.html#pricing" class="hover:text-[var(--amber)] transition-colors">Pricing</a>
+            </div>
+            <a href="index.html#pricing" class="btn-apple px-6 py-2.5 rounded-full text-sm font-bold">Get It Now</a>
+        </div>
+    </nav>
+
+    <main id="main" class="relative pt-28 md:pt-32 py-20 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="reveal text-center mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-[var(--amber)] mb-4 block">Support</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.1] tracking-tight">
+                        Support <span class="text-grad">— Interceptor</span>
+                    </h1>
+                </div>
+
+                <div class="reveal liquid-glass p-8 md:p-14">
+                    <div class="policy-body">
+                        <p class="font-bold text-gray-800"><strong>Support contact:</strong> <code>daniel.sm@me.com</code></p>
+
+                        <p><strong>Privacy policy:</strong> <a href="privacy.html" class="text-[var(--amber)] hover:text-[var(--dark)]">Privacy Policy</a></p>
+
+                        <p>
+                            This page provides support information for Interceptor. It can be published (for example on GitHub Pages)
+                            and used as the "Support URL" in App Store Connect. Contact details and useful links are provided below.
+                        </p>
+
+                        <h2>How to get help</h2>
+                        <ol>
+                            <li>Send an email to the support address above.</li>
+                            <li>(Optional) Open an issue on the project's public repository — if you choose to use Issues, include a permanent link to the issue here.</li>
+                            <li>When possible, attach an exported rules file (<code>interceptor-rules.json</code>) and a short set of steps to reproduce the problem.</li>
+                        </ol>
+
+                        <h2>Quick resolution steps (for end users)</h2>
+                        <ul>
+                            <li>Ensure the extension is enabled: Safari → Settings → Extensions → Interceptor.</li>
+                            <li>Confirm the relevant rule is enabled in the Interceptor popup.</li>
+                            <li>Reload the page and, if needed, toggle the extension off and on in Safari Settings.</li>
+                            <li>Open Develop → Show JavaScript Console to view messages and any errors from the content/injected scripts.</li>
+                            <li>If the issue relates to import/export of rules, export the rules and attach the resulting file to your report.</li>
+                        </ul>
+
+                        <h2>What to include in a bug report</h2>
+                        <p>Please include the following information — the more detail, the faster the diagnosis:</p>
+                        <ul>
+                            <li>macOS version (e.g. <code>macOS 13.5.2</code> — available from  → About This Mac).</li>
+                            <li>Safari version (e.g. <code>Safari 17.0</code>).</li>
+                            <li>Interceptor version and build number, if known.</li>
+                            <li>Exact steps to reproduce the issue (as few steps as possible).</li>
+                            <li>Example URL where the issue occurs (or note if it's a local endpoint like <code>http://localhost:3000</code>).</li>
+                            <li>An exported rules file (<code>interceptor-rules.json</code>) when applicable.</li>
+                            <li>Screenshots of the Interceptor popup and/or the JavaScript console with errors (or paste console text).</li>
+                        </ul>
+
+                        <p>Example snippet you can run in the console to check whether the extension is intercepting <code>fetch</code>:</p>
+                        <pre><code>fetch('https://jsonplaceholder.typicode.com/posts')
+  .then(r => r.text()).then(console.log).catch(console.error)
+</code></pre>
+
+                        <h2>Instructions for sending attachments</h2>
+                        <ul>
+                            <li>Attach exported rule files and screenshots to the email or issue.</li>
+                            <li>If sending console logs, prefer copying and pasting text rather than images to make searching easier.</li>
+                        </ul>
+
+                        <h2>Useful links</h2>
+                        <ul>
+                            <li>Privacy policy: <a href="privacy.html" class="text-[var(--amber)] hover:text-[var(--dark)]">privacy.html</a></li>
+                            <li>User manual / documentation: <a href="user_manual.html" class="text-[var(--amber)] hover:text-[var(--dark)]">user_manual.html</a></li>
+                            <li>Project page / releases: <a href="index.html" class="text-[var(--amber)] hover:text-[var(--dark)]">index.html</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="reveal text-center mt-12">
+                    <a href="index.html" class="inline-flex items-center gap-2 font-semibold text-[var(--amber)] hover:text-[var(--dark)] transition-colors">
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                        Back to home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-20 border-t border-gray-200/50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+                <a href="index.html" class="flex items-center gap-3">
+                    <span class="font-bold text-lg">SavannaLabs</span>
+                </a>
+                <p class="text-sm text-gray-600">&copy; 2026 SavannaLabs. All rights reserved.</p>
+                <div class="flex gap-6 text-xl text-gray-600">
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('i[class*="fa-"]').forEach(el => el.setAttribute('aria-hidden', 'true'));
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-lg');
+                navbar.style.background = 'rgba(255, 248, 240, 0.9)';
+            } else {
+                navbar.classList.remove('py-2', 'shadow-lg');
+                navbar.style.background = 'rgba(255, 248, 240, 0.7)';
+            }
+        });
+    </script>
+</body>
+</html>

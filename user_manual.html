@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manual | SavannaLabs - Interceptor</title>
+    <meta name="description" content="User manual for the Interceptor Safari extension. Installation, rules, transforms, and troubleshooting.">
+
+    <!-- CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root { --amber: #D4783B; --green: #2D6A4F; --gold: #F4A261; --offwhite: #FFF8F0; --dark: #1A1A1A; --glass: rgba(255, 255, 255, 0.4); --glass-border: rgba(255, 255, 255, 0.2); }
+        body { font-family: 'Inter', sans-serif; background-color: var(--offwhite); color: var(--dark); overflow-x: hidden; }
+        .liquid-glass { background: var(--glass); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); border: 1px solid var(--glass-border); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05); border-radius: 2rem; }
+        .glass-nav { background: rgba(255, 248, 240, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212, 120, 59, 0.1); }
+        .reveal { opacity: 0; transform: translateY(30px) scale(0.95); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+        .text-grad { background: linear-gradient(135deg, var(--amber), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .policy-body { font-size: 1rem; line-height: 1.85; color: #374151; }
+        .policy-body h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.01em; color: var(--dark); margin: 2.5rem 0 1rem; }
+        .policy-body p { margin-bottom: 1.25rem; }
+        :focus-visible { outline: 3px solid rgba(212, 120, 59, 0.65); outline-offset: 2px; } ::selection { background: rgba(212, 120, 59, 0.3); }
+        .logo-area { background: #ffffff; padding: 6px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 0; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 6px 18px rgba(0,0,0,0.04); width: auto; height: 64px; min-width: 120px; }
+        .logo-img { height: 100%; width: auto; max-width: 100%; object-fit: contain; display: block; } @media (max-width: 768px) { .logo-area { height: 48px; } }
+    </style>
+    <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-3 focus:rounded-full focus:bg-[var(--dark)] focus:text-white focus:font-bold focus:text-sm">Skip to content</a>
+
+    <div class="mesh-container">
+        <div class="mesh-ball" style="width: 600px; height: 600px; background: var(--amber); top: -10%; left: -10%;"></div>
+        <div class="mesh-ball" style="width: 500px; height: 500px; background: var(--green); bottom: -10%; right: -10%; animation-delay: -5s;"></div>
+        <div class="mesh-ball" style="width: 400px; height: 400px; background: var(--gold); top: 40%; left: 30%; animation-delay: -10s;"></div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 glass-nav py-4 transition-all duration-500" id="navbar" aria-label="Primary">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3" aria-label="SavannaLabs home">
+                <div class="logo-area"><img src="assets/savannalabs-logo.png" alt="" class="logo-img" width="107" height="50"></div>
+            </a>
+            <div class="hidden md:flex gap-8 font-medium text-sm">
+                <a href="index.html#features" class="hover:text-[var(--amber)] transition-colors">Features</a>
+                <a href="index.html#how" class="hover:text-[var(--amber)] transition-colors">How It Works</a>
+                <a href="index.html#pricing" class="hover:text-[var(--amber)] transition-colors">Pricing</a>
+            </div>
+            <a href="index.html#pricing" class="btn-apple px-6 py-2.5 rounded-full text-sm font-bold">Get It Now</a>
+        </div>
+    </nav>
+
+    <main id="main" class="relative pt-28 md:pt-32 py-20 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="reveal text-center mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-[var(--amber)] mb-4 block">User Manual</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.1] tracking-tight">Interceptor <span class="text-grad">— User Manual</span></h1>
+                </div>
+
+                <div class="reveal liquid-glass p-8 md:p-14">
+                    <div class="policy-body">
+                        <p class="font-bold text-gray-800"><strong>Version:</strong> 1.0 &nbsp;&nbsp; <strong>Platform:</strong> Safari (macOS 12.3+)</p>
+
+                        <p>Interceptor is a Safari Web Extension that intercepts and overrides <code>fetch()</code> and <code>XMLHttpRequest</code> (XHR) responses in real time. It lets you mock API responses, modify live data, and test edge cases without changing your backend.</p>
+
+                        <h2>Installation</h2>
+                        <ol>
+                            <li>Open <strong>Xcode</strong> and build the <code>Interceptor</code> project.</li>
+                            <li>Open <strong>Safari</strong> and go to <strong>Safari &gt; Settings &gt; Extensions</strong>.</li>
+                            <li>Enable the <strong>Interceptor</strong> extension.</li>
+                            <li>The Interceptor icon appears in the Safari toolbar.</li>
+                        </ol>
+
+                        <h2>Quick Start</h2>
+                        <ol>
+                            <li>Click the <strong>Interceptor</strong> icon in the Safari toolbar to open the popup.</li>
+                            <li>The example rule is pre-loaded — navigate to <code>jsonplaceholder.typicode.com</code> and make a fetch request.</li>
+                            <li>The response is intercepted and replaced with the mock data.</li>
+                            <li>Click <strong>+ Add Rule</strong> to create your own rules.</li>
+                        </ol>
+
+                        <h2>The Popup</h2>
+                        <p>The popup is the main control panel. It contains a header, a site status bar, a toolbar, the rules list, and an Add Rule button. Use the toolbar to Export, Share, or Import rules.</p>
+
+                        <h2>Managing Rules</h2>
+                        <h3>Creating a Rule</h3>
+                        <ol>
+                            <li>Click <strong>+ Add Rule</strong>.</li>
+                            <li>Fill in name, URL pattern, method, and action type.</li>
+                            <li>Complete the Mock Response or Modify Response section and click <strong>Save</strong>.</li>
+                        </ol>
+
+                        <h3>Editing & Enabling</h3>
+                        <p>Click the Edit button to change a rule. Use the toggle on each rule card to enable or disable it. Disabled rules are skipped.</p>
+
+                        <h2>Rule Editor</h2>
+                        <p>The editor opens in a separate window. Fields include Name, URL Pattern (use <code>*</code> as a wildcard), Method, and Action Type (Mock or Modify). Validation errors appear inline.</p>
+
+                        <h2>Mock Response</h2>
+                        <p>Mock returns a fabricated response without making any network request. You can set status code, body, headers, and delay.</p>
+
+                        <h2>Modify Response</h2>
+                        <p>Modify makes the original request but applies response transforms before the page receives it. Modify only works with <code>fetch()</code>. XHR requests fall through unless mocked.</p>
+
+                        <h2>Transforms</h2>
+                        <p>Transforms are applied sequentially. Types include Replace (regex), JSON Set (dot path), Prepend, and Append.</p>
+
+                        <h2>Export, Import & Share</h2>
+                        <p>Export produces <code>interceptor-rules.json</code>. Share opens the macOS share sheet. Import accepts either a bare array or an export envelope with a <code>rules</code> array.</p>
+
+                        <h2>Troubleshooting</h2>
+                        <p>Common issues: ensure the rule is enabled, site is not de-authorized, confirm the URL pattern and method, reload the page, or toggle the extension in Safari Settings.</p>
+
+                        <h2>Data Format Reference</h2>
+                        <pre><code>{
+  "id": "rule_1722268800000_a1b2",
+  "name": "My Rule",
+  "urlPattern": "*://api.example.com/*",
+  "method": "GET",
+  "enabled": true,
+  "action": { "type": "mock", "statusCode": 200, "responseBody": "{\"key\": \"value\"}", "headers": {"Content-Type": "application/json"}, "delay": 0 }
+}
+</code></pre>
+
+                        <p class="mt-6">For more detailed developer-oriented notes, consult the repository README and the in-source comments.</p>
+                    </div>
+                </div>
+
+                <div class="reveal text-center mt-12">
+                    <a href="index.html" class="inline-flex items-center gap-2 font-semibold text-[var(--amber)] hover:text-[var(--dark)] transition-colors">
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                        Back to home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-20 border-t border-gray-200/50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+                <a href="index.html" class="flex items-center gap-3"><span class="font-bold text-lg">SavannaLabs</span></a>
+                <p class="text-sm text-gray-600">&copy; 2026 SavannaLabs. All rights reserved.</p>
+                <div class="flex gap-6 text-xl text-gray-600">
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                    <a href="#" class="hover:text-[var(--amber)] transition-colors" aria-label="SavannaLabs on LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('i[class*="fa-"]').forEach(el => el.setAttribute('aria-hidden', 'true'));
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-lg');
+                navbar.style.background = 'rgba(255, 248, 240, 0.9)';
+            } else {
+                navbar.classList.remove('py-2', 'shadow-lg');
+                navbar.style.background = 'rgba(255, 248, 240, 0.7)';
+            }
+        });
+    </script>
+</body>
+</html>
