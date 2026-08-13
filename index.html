@@ -251,61 +251,34 @@
     <main id="main">
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-28 md:pt-32 overflow-hidden">
-        <div class="container mx-auto px-6 text-center z-10">
-            <div class="reveal inline-flex items-center gap-2 bg-white/50 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full mb-8 shadow-sm">
-                <span class="flex h-2 w-2 rounded-full bg-[var(--amber)] animate-ping" aria-hidden="true"></span>
-                <span class="text-xs font-bold uppercase tracking-widest text-[var(--amber)]">Native macOS Launch</span>
-            </div>
-            
-            <h1 class="reveal text-fluid-h1 font-extrabold leading-[1.1] tracking-tight mb-6">
-                Master your <span class="text-grad">requests</span><br>in Safari.
-            </h1>
-            
-            <p class="reveal text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Interceptor is the ultimate tool for developers. Mock, modify and analyze HTTP traffic natively, with no proxies or complex configuration.
-            </p>
-
-            <div class="reveal flex flex-col md:flex-row gap-4 justify-center items-center mb-20">
-                <button type="button" class="btn-apple flex items-center gap-3 px-10 py-5 rounded-2xl text-lg font-bold">
-                    <i class="fa-brands fa-apple text-2xl"></i>
-                    Download on the Mac App Store
-                </button>
-                <span class="text-sm font-medium text-gray-800">Version 1.0 • macOS</span>
-            </div>
-
-            <!-- Hero Mockup -->
-            <div class="reveal max-w-5xl mx-auto relative">
-                <div class="liquid-glass p-4 md:p-8 border-white/40 shadow-2xl">
-                    <div class="bg-white/80 rounded-xl overflow-hidden shadow-inner border border-gray-100">
-                        <div class="flex items-center gap-2 px-4 py-3 bg-gray-50/50 border-b border-gray-100">
-                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
-                            <div class="ml-4 text-[10px] font-bold text-gray-600 uppercase tracking-widest">Interceptor Rule Editor</div>
-                        </div>
-                        <div class="p-6 md:p-12 text-left">
-                            <div class="grid md:grid-cols-2 gap-8">
-                                <div class="space-y-6">
-                                    <div class="h-2 w-24 bg-[var(--amber)]/20 rounded"></div>
-                                    <div class="h-12 w-full bg-gray-100 rounded-lg"></div>
-                                    <div class="h-2 w-32 bg-[var(--amber)]/20 rounded"></div>
-                                    <div class="h-32 w-full bg-gray-100 rounded-lg"></div>
-                                </div>
-                                <div class="hidden md:block space-y-4">
-                                    <div class="flex justify-between items-center p-4 bg-[var(--amber)]/5 rounded-xl border border-[var(--amber)]/10">
-                                        <span class="text-sm font-bold">Status Code</span>
-                                        <span class="text-sm font-mono text-[var(--amber)]">200 OK</span>
-                                    </div>
-                                    <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
-                                        <span class="text-xs font-bold text-gray-600 block mb-2">HEADERS</span>
-                                        <div class="h-2 w-full bg-gray-200 rounded mb-2"></div>
-                                        <div class="h-2 w-3/4 bg-gray-200 rounded"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <section class="relative min-h-screen flex items-center pt-28 md:pt-32 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 bg-white/50 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full mb-6 shadow-sm">
+                        <span class="flex h-2 w-2 rounded-full bg-[var(--amber)] animate-ping" aria-hidden="true"></span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-[var(--amber)]">Native macOS Launch</span>
                     </div>
+
+                    <h1 class="reveal text-fluid-h1 font-extrabold leading-[1.1] tracking-tight mb-6">
+                        Master your <span class="text-grad">requests</span><br>in Safari.
+                    </h1>
+
+                    <p class="reveal text-lg md:text-xl text-gray-700 max-w-lg mb-8 leading-relaxed">
+                        Mock, modify and analyze HTTP traffic — natively in Safari.
+                    </p>
+
+                    <div class="reveal flex flex-col sm:flex-row gap-4 sm:items-center">
+                        <a href="#pricing" class="btn-apple inline-flex items-center gap-3 px-6 py-3 rounded-2xl text-lg font-bold">
+                            <i class="fa-brands fa-apple text-2xl"></i>
+                            Download on the Mac App Store
+                        </a>
+                    </div>
+                </div>
+
+                <div class="reveal relative">
+                    <img src="assets/hero-mockup.png" alt="Interceptor mockups" class="w-full h-auto rounded-2xl shadow-2xl" onerror="this.style.display='none'">
+                    <img src="assets/hero-popup.png" alt="Interceptor popup" class="absolute -top-12 right-6 w-2/3 md:w-1/2 rounded-xl shadow-2xl hidden sm:block" style="transform: translateY(-8%);" onerror="this.style.display='none'">
                 </div>
             </div>
         </div>
