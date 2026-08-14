@@ -276,10 +276,21 @@
                     </div>
                 </div>
 
-                <div class="reveal relative">
-                    <img src="assets/hero-mockup.png" alt="Interceptor mockups" class="w-full h-auto rounded-2xl shadow-2xl" onerror="this.style.display='none'">
-                    <img src="assets/hero-popup.png" alt="Interceptor popup" class="absolute -top-12 right-6 w-2/3 md:w-1/2 rounded-xl shadow-2xl hidden sm:block" style="transform: translateY(-8%);" onerror="this.style.display='none'">
-                </div>
+                <!-- right column intentionally left blank; mockup images moved to a dedicated gallery section below -->
+                <div aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section: stacked mockups (large) -->
+    <section id="gallery" class="py-16 md:py-24">
+        <div class="container mx-auto px-6">
+            <div class="reveal relative flex justify-center items-center">
+                <!-- Main mockup (background) -->
+                <img src="assets/hero-mockup.png" alt="Interceptor mockups" class="w-full max-w-6xl rounded-2xl shadow-2xl">
+
+                <!-- Popup (overlaid) -->
+                <img src="assets/hero-popup.png" alt="Interceptor popup" class="hidden md:block absolute right-12 md:right-24 w-1/2 lg:w-2/5 max-w-2xl rounded-xl shadow-2xl" style="transform: translateY(-8%);" onerror="this.style.display='none'">
             </div>
         </div>
     </section>
